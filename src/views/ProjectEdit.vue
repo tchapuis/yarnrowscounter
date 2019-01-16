@@ -102,6 +102,10 @@ export default {
             this.$swal({
                 type: 'success',
                 title: 'Projet enregistré avec succès !'
+            }).then((result) => {
+                if(result.value) {
+                    this.$router.go(-1);
+                }
             });
         });
       }
