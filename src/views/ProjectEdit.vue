@@ -11,7 +11,6 @@
             <hr>
             <div class="d-flex mb-4">
                 <h4>Gestion des blocks</h4>
-                <b-button class="ml-auto" variant="primary" v-on:click="addBlock()">Ajouter un block</b-button>
             </div>
             <div v-for="(block, key) in blocks" :key="block.id">
                 <b-card class="mb-4">
@@ -57,6 +56,9 @@
                         <b-button class="ml-auto" variant="danger" size="sm" v-on:click="removeBlock(key)">Supprimer le block</b-button>
                     </div>
                 </b-card>
+            </div>
+            <div class="d-flex">
+                <b-button class="m-auto" variant="outline-primary" v-on:click="addBlock()"><i class="fas fa-plus mr-2"></i>Ajouter un block</b-button>
             </div>
             <div class="d-flex">
                 <b-button class="ml-auto" variant="primary" type="submit">Enregistrer</b-button>

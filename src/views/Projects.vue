@@ -2,7 +2,7 @@
   <div class="">
     <div class="d-flex align-items-center mb-2">
       <h1>Mes projets</h1>
-      <router-link :to="{ name: 'projectCreate'}" class="btn btn-primary ml-auto">Nouveau projet</router-link>
+      <router-link :to="{ name: 'projectCreate'}" class="btn btn-primary ml-auto"><i class="fas fa-plus mr-2"></i>Nouveau projet</router-link>
     </div>
       <table class="table">
         <thead class="thead-dark">
@@ -19,7 +19,7 @@
               <td>
                 <router-link :to="{ name: 'counter', params: { projectId: key }}" class="btn btn-primary mb-2 mr-2">Compteur</router-link>
                 <router-link :to="{ name: 'projectEdit', params: { projectId: key }}" class="btn btn-primary mb-2 mr-2">Editer</router-link>
-                <b-button variant="primary" v-on:click="deleteProject(key)" class="mb-2">Supprimer</b-button>
+                <b-button variant="danger" v-on:click="deleteProject(key)" class="mb-2">Supprimer</b-button>
               </td>
           </tr>
         </tbody>
