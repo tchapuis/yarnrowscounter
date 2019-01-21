@@ -49,7 +49,7 @@
                     </b-row>
 
                     <div class="d-flex">
-                        <b-button class="ml-auto" variant="danger" size="sm" v-on:click="removeBlock(key)">Supprimer le block</b-button>
+                        <b-button class="ml-auto" variant="danger" size="sm" v-on:click="removeBlock(key)"><i class="far fa-trash-alt"></i></b-button>
                     </div>
                 </b-card>
             </div>

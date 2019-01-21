@@ -18,8 +18,8 @@
               <td>{{project.blocks ? project.blocks.length : 0}}</td>
               <td>
                 <router-link :to="{ name: 'counter', params: { projectId: key }}" class="btn btn-primary mb-2 mr-2">Compteur</router-link>
-                <router-link :to="{ name: 'projectEdit', params: { projectId: key }}" class="btn btn-primary mb-2 mr-2">Editer</router-link>
-                <b-button variant="danger" v-on:click="deleteProject(key)" class="mb-2">Supprimer</b-button>
+                <router-link :to="{ name: 'projectEdit', params: { projectId: key }}" class="btn btn-primary mb-2 mr-2"><i class="fas fa-edit"></i></router-link>
+                <b-button variant="danger" v-on:click="deleteProject(key)" class="mb-2"><i class="far fa-trash-alt"></i></b-button>
               </td>
           </tr>
         </tbody>
