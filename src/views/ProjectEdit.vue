@@ -61,6 +61,7 @@
                 <b-button class="m-auto" variant="outline-primary" v-on:click="addBlock()"><i class="fas fa-plus mr-2"></i>Ajouter un block</b-button>
             </div>
             <div class="d-flex">
+                <router-link to="/" class="btn btn-secondary">Annuler</router-link>
                 <b-button class="ml-auto" variant="primary" type="submit">Enregistrer</b-button>
             </div>
         </form>

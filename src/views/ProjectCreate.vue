@@ -59,6 +59,7 @@
             </div>
 
             <div class="d-flex">
+                <router-link to="/" class="btn btn-secondary">Annuler</router-link>
                 <b-button class="ml-auto" variant="primary" type="submit">Enregistrer</b-button>
             </div>
         </form>
@@ -85,6 +86,7 @@ export default {
           this.project.blocks = this.blocks;
       },
       saveProject: function(projectId) {
+        this.project.time = 0;
         firebase.db.ref('/projects/').push(this.project);
         this.$router.push({ name: 'projects'})
       }
