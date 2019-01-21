@@ -45,6 +45,14 @@
                         </b-col>
                     </b-row>
 
+                    <b-row>
+                        <b-col cols="12" md="12">
+                            <b-form-group id="blockCommentFieldset" label="Commentaire" label-for="blockComment">
+                                 <b-form-textarea id="textarea1" v-model="block.comment" :rows="3" :max-rows="6"></b-form-textarea>
+                            </b-form-group>
+                        </b-col>
+                    </b-row>
+
                     <div class="d-flex">
                         <b-button class="ml-auto" variant="danger" size="sm" v-on:click="removeBlock(key)">Supprimer le block</b-button>
                     </div>

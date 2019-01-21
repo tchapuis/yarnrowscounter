@@ -33,6 +33,7 @@
                 <b-button variant="primary" v-on:click="addStitch(key)">+ 1</b-button>
               </div>
             </div>
+            <p>{{ block.comment }}</p>
           </b-card>
         </div>
   </div>
