@@ -97,11 +97,24 @@ export default {
       this.pauseButton = false;
     },
     resetTimer: function() {
-      this.project.time = 0;
-      firebase.db.ref('/projects/' + this.$route.params.projectId).update(this.project);
-      clearInterval(this.timer);
-      this.timer = null;
-      this.pauseButton = false;
+      this.$swal({
+        title: 'Confirmer la remive à zéro ?',
+        text: 'La remive à zéro est définitive !',
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#007bff',
+        cancelButtonColor: '#dc3545',
+        confirmButtonText: 'Pas de soucis',
+        cancelButtonText: 'Non!',
+      }).then((result) => {
+        if (result.value) {
+          this.project.time = 0;
+          firebase.db.ref('/projects/' + this.$route.params.projectId).update(this.project);
+          clearInterval(this.timer);
+          this.timer = null;
+          this.pauseButton = false;
+        }
+      })
     },
     padTime: function(time) {
       return (time < 10 ? '0' : '') + time;
