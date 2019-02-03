@@ -43,7 +43,7 @@
                     <b-row>
                         <b-col cols="12" md="12">
                             <b-form-group id="blockCommentFieldset" label="Commentaire" label-for="blockComment">
-                                    <b-form-textarea id="textarea1" v-model="block.comment" :rows="3" :max-rows="6"></b-form-textarea>
+                                    <wysiwyg v-model="block.comment"/>
                             </b-form-group>
                         </b-col>
                     </b-row>
@@ -70,22 +70,22 @@
 const firebase = require('../firebaseConfig.js');
 export default {
   name: 'ProjectEdit',
-  data: function () {
+  data: () => {
       return {
         project: [],
         blocks: []
       }
   },
   methods: {
-      addBlock: function() {
+      addBlock: () => {
           this.blocks.push({name: '', rows: 0, maxRows: 1, stitchs: 0, maxStitchs: 1});
           this.project.blocks = this.blocks;
       },
-      removeBlock: function(blockId) {
+      removeBlock: (blockId) => {
           this.blocks.splice(blockId, 1);
           this.project.blocks = this.blocks;
       },
-      saveProject: function(projectId) {
+      saveProject: () => {
         this.project.time = 0;
         firebase.db.ref('/projects/').push(this.project);
         this.$router.push({ name: 'projects'})

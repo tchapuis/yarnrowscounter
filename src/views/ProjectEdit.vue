@@ -47,7 +47,7 @@
                     <b-row>
                         <b-col cols="12" md="12">
                             <b-form-group id="blockCommentFieldset" label="Commentaire" label-for="blockComment">
-                                 <b-form-textarea id="textarea1" v-model="block.comment" :rows="3" :max-rows="6"></b-form-textarea>
+                                 <wysiwyg v-model="block.comment"/>
                             </b-form-group>
                         </b-col>
                     </b-row>
@@ -72,19 +72,19 @@
 const firebase = require('../firebaseConfig.js');
 export default {
   name: 'ProjectEdit',
-  data: function () {
+  data: () => {
       return {
         project: [],
         blocks: []
       }
   },
   methods: {
-      addBlock: function() {
+      addBlock: () => {
           this.blocks.push({name: '', rows: 0, maxRows: 1, stitchs: 0, maxStitchs: 1});
           this.project.blocks = this.blocks;
           firebase.db.ref('/projects/' + this.$route.params.projectId + '/blocks/').set(this.project.blocks);
       },
-      removeBlock: function(blockId) {
+      removeBlock: (blockId) => {
           if(this.blocks[blockId].rows > 0 || this.blocks[blockId].stitchs > 0) {
             this.$swal({
                 title: 'Confirmer la suppression ?',
@@ -108,7 +108,7 @@ export default {
             firebase.db.ref('/projects/' + this.$route.params.projectId + '/blocks/').set(this.project.blocks);
           }
       },
-      saveProject: function(projectId) {
+      saveProject: () => {
         firebase.db.ref('/projects/' + this.$route.params.projectId).update(this.project, () => {
             this.$swal({
                 type: 'success',

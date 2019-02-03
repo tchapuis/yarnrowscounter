@@ -2,6 +2,7 @@
 node_modules
 dist
 # local env files
+.env
 .env.local
 .env.*.local
 
@@ -18,3 +19,7 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
+
+.firebase
+.firebaserc
+firebase-debug.log

@@ -23,31 +23,31 @@
             <h2 slot="header" class="mb-0">{{ block.name }}</h2>
             <div class="mb-3">
               <p>Nombre de rangs</p>
-              <b-progress :max="parseInt(block.maxRows)" show-value class="mb-3">
+              <b-progress :max="parseInt(block.maxRows)" class="mb-3">
                 <b-progress-bar v-if="parseInt(block.rows) < parseInt(block.maxRows)" :value="parseInt(block.rows)" variant="primary"></b-progress-bar>
                 <b-progress-bar v-else-if="parseInt(block.rows) == parseInt(block.maxRows)" :value="parseInt(block.rows)" variant="success"></b-progress-bar>
                 <b-progress-bar v-else :value="parseInt(block.rows)" variant="danger"></b-progress-bar>
               </b-progress>
               <div class="d-flex justify-content-around align-items-center">
                 <b-button variant="primary" v-on:click="removeRow(key)"><i class="fas fa-minus"></i></b-button>
-                <h3 class="mb-0">{{ block.rows }}</h3>
+                <h3 class="mb-0">{{ block.rows }} / {{ block.maxRows }}</h3>
                 <b-button variant="primary" v-on:click="addRow(key)"><i class="fas fa-plus"></i></b-button>
               </div>
             </div>
-            <div>
+            <div class="mb-3">
               <p>Nombre de mailles</p>
-              <b-progress :max="parseInt(block.maxStitchs)" show-value class="mb-3">
+              <b-progress :max="parseInt(block.maxStitchs)" class="mb-3">
                 <b-progress-bar v-if="parseInt(block.stitchs) < parseInt(block.maxStitchs)" :value="parseInt(block.stitchs)" variant="primary"></b-progress-bar>
                 <b-progress-bar v-else-if="parseInt(block.stitchs) == parseInt(block.maxStitchs)" :value="parseInt(block.stitchs)" variant="success"></b-progress-bar>
                 <b-progress-bar v-else :value="parseInt(block.stitchs)" variant="danger"></b-progress-bar>
               </b-progress>
               <div class="d-flex justify-content-around align-items-center">
                 <b-button variant="primary" v-on:click="removeStitch(key)"><i class="fas fa-minus"></i></b-button>
-                <h3 class="mb-0">{{ block.stitchs }}</h3>
+                <h3 class="mb-0">{{ block.stitchs }} / {{ block.maxStitchs }}</h3>
                 <b-button variant="primary" v-on:click="addStitch(key)"><i class="fas fa-plus"></i></b-button>
               </div>
             </div>
-            <p>{{ block.comment }}</p>
+            <div v-html="block.comment"></div>
           </b-card>
         </div>
   </div>
