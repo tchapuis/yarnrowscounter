@@ -6,22 +6,23 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "start": "node server.js",
-    "firebase-deploy": "npm run build && firebase deploy"
+    "firebase-deploy": "npm run build && firebase deploy",
+    "start": "node server.js"
   },
   "dependencies": {
     "bootstrap-vue": "^2.0.0-rc.11",
     "express": "^4.16.4",
-    "firebase": "^5.7.3",
+    "firebase": "^5.8.2",
     "vue": "^2.5.22",
     "vue-router": "^3.0.2",
     "vue-sweetalert2": "^1.6.4",
-    "vue-wysiwyg": "^1.7.2"
+    "vue-wysiwyg": "^1.7.2",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.3.0",
-    "@vue/cli-plugin-eslint": "^3.3.0",
-    "@vue/cli-service": "^3.3.0",
+    "@vue/cli-plugin-babel": "^3.4.0",
+    "@vue/cli-plugin-eslint": "^3.4.0",
+    "@vue/cli-service": "^3.4.0",
     "vue-template-compiler": "^2.5.22"
   },
   "eslintConfig": {

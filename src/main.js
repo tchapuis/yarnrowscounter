@@ -8,6 +8,7 @@ import wysiwyg from "vue-wysiwyg";
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import "vue-wysiwyg/dist/vueWysiwyg.css";
+import store from './store'
 
 Vue.config.productionTip = false
 Vue.use(BootstrapVue);
@@ -22,5 +23,6 @@ Vue.use(wysiwyg, {
 
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount('#app')
