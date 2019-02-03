@@ -49,13 +49,17 @@ export default {
         cancelButtonText: 'Non!',
       }).then((result) => {
         if (result.value) {
-          firebase.db.ref('projects/' + projectId).remove();
+          firebase.db.ref('users')
+          .child(this.$store.state.currentUser.user.uid + '/projects/' + projectId)
+          .remove();
         }
       })
     }
   },
   created() {
-    firebase.db.ref('projects').on('value', snapshot => this.projects = snapshot.val());
+    firebase.db.ref('users')
+      .child(this.$store.state.currentUser.user.uid + '/projects/')
+      .on('value', snapshot => this.projects = snapshot.val());
   }
 }
 </script>

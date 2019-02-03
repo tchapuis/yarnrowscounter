@@ -5,12 +5,21 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-
+    isAuthenticated: false,
+    currentUser: null
   },
   mutations: {
-
+    setCurrentUser(state, val) {
+      state.currentUser = val
+    },
+    setIsAuthenticated(state, val) {
+      state.isAuthenticated = val;
+    } 
   },
   actions: {
-
+    clearData({commit}) {
+      commit('setIsAuthenticated', false);
+      commit('setCurrentUser', null);
+    }
   }
 })

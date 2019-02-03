@@ -77,17 +77,18 @@ export default {
       }
   },
   methods: {
-      addBlock: () => {
+      addBlock: function() {
           this.blocks.push({name: '', rows: 0, maxRows: 1, stitchs: 0, maxStitchs: 1});
-          this.project.blocks = this.blocks;
       },
-      removeBlock: (blockId) => {
+      removeBlock: function(blockId) {
           this.blocks.splice(blockId, 1);
-          this.project.blocks = this.blocks;
       },
-      saveProject: () => {
+      saveProject: function() {
         this.project.time = 0;
-        firebase.db.ref('/projects/').push(this.project);
+        this.project.blocks = this.blocks;
+        firebase.db.ref('/users/')
+            .child(this.$store.state.currentUser.user.uid + '/projects/')
+            .push(this.project);
         this.$router.push({ name: 'projects'})
       }
   }

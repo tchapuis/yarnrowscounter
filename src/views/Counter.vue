@@ -68,22 +68,30 @@ export default {
   methods: {
     addRow: function (blockId) {
       this.project.blocks[blockId].rows += 1;
-      firebase.db.ref('/projects/' + this.$route.params.projectId + '/blocks/' + blockId).update(this.project.blocks[blockId]);
+      firebase.db.ref('/users/')
+        .child(this.$store.state.currentUser.user.uid +'/projects/' + this.$route.params.projectId + '/blocks/' + blockId)
+        .update(this.project.blocks[blockId]);
     },
     removeRow: function(blockId) {
         if(this.project.blocks[blockId].rows > 0) {
             this.project.blocks[blockId].rows -= 1;
-            firebase.db.ref('/projects/' + this.$route.params.projectId + '/blocks/' + blockId).update(this.project.blocks[blockId]);
+            firebase.db.ref('/users/')
+              .child(this.$store.state.currentUser.user.uid + '/projects/' + this.$route.params.projectId + '/blocks/' + blockId)
+              .update(this.project.blocks[blockId]);
         }
     },
     addStitch: function (blockId) {
       this.project.blocks[blockId].stitchs += 1;
-      firebase.db.ref('/projects/' + this.$route.params.projectId + '/blocks/' + blockId).update(this.project.blocks[blockId]);
+      firebase.db.ref('/users/')
+        .child(this.$store.state.currentUser.user.uid + '/projects/' + this.$route.params.projectId + '/blocks/' + blockId)
+        .update(this.project.blocks[blockId]);
     },
     removeStitch: function(blockId) {
         if(this.project.blocks[blockId].stitchs > 0) {
             this.project.blocks[blockId].stitchs -= 1;
-            firebase.db.ref('/projects/' + this.$route.params.projectId + '/blocks/' + blockId).update(this.project.blocks[blockId]);
+            firebase.db.ref('/users/')
+              .child(this.$store.state.currentUser.user.uid + '/projects/' + this.$route.params.projectId + '/blocks/' + blockId)
+              .update(this.project.blocks[blockId]);
         }
     },
     startTimer: function() {
@@ -91,7 +99,9 @@ export default {
       this.pauseButton = true;
     },
     pauseTimer: function() {
-      firebase.db.ref('/projects/' + this.$route.params.projectId).update(this.project);
+      firebase.db.ref('/users/')
+        .child(this.$store.state.currentUser.user.uid + '/projects/' + this.$route.params.projectId)
+        .update(this.project);
       clearInterval(this.timer);
       this.timer = null;
       this.pauseButton = false;
@@ -109,7 +119,9 @@ export default {
       }).then((result) => {
         if (result.value) {
           this.project.time = 0;
-          firebase.db.ref('/projects/' + this.$route.params.projectId).update(this.project);
+          firebase.db.ref('/users/')
+            .child(this.$store.state.currentUser.user.uid + '/projects/' + this.$route.params.projectId)
+            .update(this.project);
           clearInterval(this.timer);
           this.timer = null;
           this.pauseButton = false;
@@ -135,7 +147,10 @@ export default {
     }
   },
   created() {
-    firebase.db.ref('/projects/' + this.$route.params.projectId).once('value', snapshot => {
+    firebase.db
+      .ref('/users/')
+      .child(this.$store.state.currentUser.user.uid + '/projects/' + this.$route.params.projectId)
+      .once('value', snapshot => {
       this.project = snapshot.val();
       this.project.id = snapshot.key;
     });

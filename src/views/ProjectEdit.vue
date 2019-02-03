@@ -79,12 +79,14 @@ export default {
       }
   },
   methods: {
-      addBlock: () => {
+      addBlock: function() {
           this.blocks.push({name: '', rows: 0, maxRows: 1, stitchs: 0, maxStitchs: 1});
           this.project.blocks = this.blocks;
-          firebase.db.ref('/projects/' + this.$route.params.projectId + '/blocks/').set(this.project.blocks);
+          firebase.db.ref('/users/')
+            .child(this.$store.state.currentUser.user.uid + '/projects/' + this.$route.params.projectId + '/blocks/')
+            .set(this.project.blocks);
       },
-      removeBlock: (blockId) => {
+      removeBlock: function(blockId) {
           if(this.blocks[blockId].rows > 0 || this.blocks[blockId].stitchs > 0) {
             this.$swal({
                 title: 'Confirmer la suppression ?',
@@ -99,33 +101,41 @@ export default {
                 if (result.value) {
                     this.blocks.splice(blockId, 1);
                     this.project.blocks = this.blocks;
-                    firebase.db.ref('/projects/' + this.$route.params.projectId + '/blocks/').set(this.project.blocks);
+                    firebase.db.ref('/users/')
+                    .child(this.$store.state.currentUser.user.uid + '/projects/' + this.$route.params.projectId + '/blocks/')
+                    .set(this.project.blocks);
                 }
             })
           } else {
             this.blocks.splice(blockId, 1);
             this.project.blocks = this.blocks;
-            firebase.db.ref('/projects/' + this.$route.params.projectId + '/blocks/').set(this.project.blocks);
+            firebase.db.ref('/users/')
+                .child(this.$store.state.currentUser.user.uid + '/projects/' + this.$route.params.projectId + '/blocks/')
+                .set(this.project.blocks);
           }
       },
-      saveProject: () => {
-        firebase.db.ref('/projects/' + this.$route.params.projectId).update(this.project, () => {
-            this.$swal({
-                type: 'success',
-                title: 'Projet enregistré avec succès !'
-            }).then((result) => {
-                if(result.value) {
-                    this.$router.go(-1);
-                }
+      saveProject: function() {
+        firebase.db.ref('/users/')
+            .child(this.$store.state.currentUser.user.uid + '/projects/' + this.$route.params.projectId)
+            .update(this.project, () => {
+                this.$swal({
+                    type: 'success',
+                    title: 'Projet enregistré avec succès !'
+                }).then((result) => {
+                    if(result.value) {
+                        this.$router.go(-1);
+                    }
+                });
             });
-        });
       }
   },
   created() {
-    firebase.db.ref('/projects/' + this.$route.params.projectId).on('value', snapshot => {
-        this.project = snapshot.val();
-        this.blocks = this.project.blocks;
-    });
+    firebase.db.ref('/users/')
+        .child(this.$store.state.currentUser.user.uid + '/projects/' + this.$route.params.projectId)
+        .on('value', snapshot => {
+            this.project = snapshot.val();
+            this.blocks = this.project.blocks;
+        });
     
   }
 }
