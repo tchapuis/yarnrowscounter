@@ -46,7 +46,7 @@ export default {
             firebase.auth.signInWithEmailAndPassword(this.email, this.password)
               .then(user => {
                   this.$store.commit('setIsAuthenticated', true);
-                  this.$store.commit('setCurrentUser', user);
+                  this.$store.commit('setCurrentUser', user.user);
                   this.$router.push('/projects');
               }).catch(err => {
                   // eslint-disable-next-line

@@ -83,7 +83,7 @@ export default {
           this.blocks.push({name: '', rows: 0, maxRows: 1, stitchs: 0, maxStitchs: 1});
           this.project.blocks = this.blocks;
           firebase.db.ref('/users/')
-            .child(this.$store.state.currentUser.user.uid + '/projects/' + this.$route.params.projectId + '/blocks/')
+            .child(this.$store.state.currentUser.uid + '/projects/' + this.$route.params.projectId + '/blocks/')
             .set(this.project.blocks);
       },
       removeBlock: function(blockId) {
@@ -102,7 +102,7 @@ export default {
                     this.blocks.splice(blockId, 1);
                     this.project.blocks = this.blocks;
                     firebase.db.ref('/users/')
-                    .child(this.$store.state.currentUser.user.uid + '/projects/' + this.$route.params.projectId + '/blocks/')
+                    .child(this.$store.state.currentUser.uid + '/projects/' + this.$route.params.projectId + '/blocks/')
                     .set(this.project.blocks);
                 }
             })
@@ -110,13 +110,13 @@ export default {
             this.blocks.splice(blockId, 1);
             this.project.blocks = this.blocks;
             firebase.db.ref('/users/')
-                .child(this.$store.state.currentUser.user.uid + '/projects/' + this.$route.params.projectId + '/blocks/')
+                .child(this.$store.state.currentUser.uid + '/projects/' + this.$route.params.projectId + '/blocks/')
                 .set(this.project.blocks);
           }
       },
       saveProject: function() {
         firebase.db.ref('/users/')
-            .child(this.$store.state.currentUser.user.uid + '/projects/' + this.$route.params.projectId)
+            .child(this.$store.state.currentUser.uid + '/projects/' + this.$route.params.projectId)
             .update(this.project, () => {
                 this.$swal({
                     type: 'success',
@@ -131,7 +131,7 @@ export default {
   },
   created() {
     firebase.db.ref('/users/')
-        .child(this.$store.state.currentUser.user.uid + '/projects/' + this.$route.params.projectId)
+        .child(this.$store.state.currentUser.uid + '/projects/' + this.$route.params.projectId)
         .on('value', snapshot => {
             this.project = snapshot.val();
             this.blocks = this.project.blocks;

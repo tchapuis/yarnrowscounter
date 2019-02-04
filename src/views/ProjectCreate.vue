@@ -87,7 +87,7 @@ export default {
         this.project.time = 0;
         this.project.blocks = this.blocks;
         firebase.db.ref('/users/')
-            .child(this.$store.state.currentUser.user.uid + '/projects/')
+            .child(this.$store.state.currentUser.uid + '/projects/')
             .push(this.project);
         this.$router.push({ name: 'projects'})
       }

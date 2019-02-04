@@ -12,7 +12,7 @@
             <router-link to="/" class="nav-item nav-link" active-class="active"><i class="fas fa-home mr-2"></i>Projects</router-link>
           </b-navbar-nav>
           <b-navbar-nav class="ml-auto">
-            <b-nav-item @click="logout()">Logout</b-nav-item>
+            <b-nav-item @click="logout()">Déconnexion<i class="fas fa-sign-out-alt ml-2"></i></b-nav-item>
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>

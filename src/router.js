@@ -5,6 +5,7 @@ import Projects from './views/Projects.vue'
 import ProjectEdit from './views/ProjectEdit.vue'
 import ProjectCreate from './views/ProjectCreate.vue'
 import Login from './views/auth/Login.vue'
+import store from './store'
 
 const firebase = require('./firebaseConfig.js');
 
@@ -59,14 +60,17 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth)
-  const currentUser = firebase.auth.currentUser
-
-  if (requiresAuth && !currentUser) {
-      next('/login')
-  } else if (requiresAuth && currentUser) {
-      next()
+  if(requiresAuth) {
+    firebase.auth.onAuthStateChanged((firebaseUser) => {
+      if (firebaseUser) {
+        store.dispatch('autoSignIn', firebaseUser);
+        next();
+      } else {
+        next('/login');
+      }
+    })
   } else {
-      next()
+    next();
   }
 });
 

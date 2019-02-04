@@ -69,28 +69,28 @@ export default {
     addRow: function (blockId) {
       this.project.blocks[blockId].rows += 1;
       firebase.db.ref('/users/')
-        .child(this.$store.state.currentUser.user.uid +'/projects/' + this.$route.params.projectId + '/blocks/' + blockId)
+        .child(this.$store.state.currentUser.uid +'/projects/' + this.$route.params.projectId + '/blocks/' + blockId)
         .update(this.project.blocks[blockId]);
     },
     removeRow: function(blockId) {
         if(this.project.blocks[blockId].rows > 0) {
             this.project.blocks[blockId].rows -= 1;
             firebase.db.ref('/users/')
-              .child(this.$store.state.currentUser.user.uid + '/projects/' + this.$route.params.projectId + '/blocks/' + blockId)
+              .child(this.$store.state.currentUser.uid + '/projects/' + this.$route.params.projectId + '/blocks/' + blockId)
               .update(this.project.blocks[blockId]);
         }
     },
     addStitch: function (blockId) {
       this.project.blocks[blockId].stitchs += 1;
       firebase.db.ref('/users/')
-        .child(this.$store.state.currentUser.user.uid + '/projects/' + this.$route.params.projectId + '/blocks/' + blockId)
+        .child(this.$store.state.currentUser.uid + '/projects/' + this.$route.params.projectId + '/blocks/' + blockId)
         .update(this.project.blocks[blockId]);
     },
     removeStitch: function(blockId) {
         if(this.project.blocks[blockId].stitchs > 0) {
             this.project.blocks[blockId].stitchs -= 1;
             firebase.db.ref('/users/')
-              .child(this.$store.state.currentUser.user.uid + '/projects/' + this.$route.params.projectId + '/blocks/' + blockId)
+              .child(this.$store.state.currentUser.uid + '/projects/' + this.$route.params.projectId + '/blocks/' + blockId)
               .update(this.project.blocks[blockId]);
         }
     },
@@ -100,7 +100,7 @@ export default {
     },
     pauseTimer: function() {
       firebase.db.ref('/users/')
-        .child(this.$store.state.currentUser.user.uid + '/projects/' + this.$route.params.projectId)
+        .child(this.$store.state.currentUser.uid + '/projects/' + this.$route.params.projectId)
         .update(this.project);
       clearInterval(this.timer);
       this.timer = null;
@@ -120,7 +120,7 @@ export default {
         if (result.value) {
           this.project.time = 0;
           firebase.db.ref('/users/')
-            .child(this.$store.state.currentUser.user.uid + '/projects/' + this.$route.params.projectId)
+            .child(this.$store.state.currentUser.uid + '/projects/' + this.$route.params.projectId)
             .update(this.project);
           clearInterval(this.timer);
           this.timer = null;
@@ -149,7 +149,7 @@ export default {
   created() {
     firebase.db
       .ref('/users/')
-      .child(this.$store.state.currentUser.user.uid + '/projects/' + this.$route.params.projectId)
+      .child(this.$store.state.currentUser.uid + '/projects/' + this.$route.params.projectId)
       .once('value', snapshot => {
       this.project = snapshot.val();
       this.project.id = snapshot.key;

@@ -20,6 +20,10 @@ export default new Vuex.Store({
     clearData({commit}) {
       commit('setIsAuthenticated', false);
       commit('setCurrentUser', null);
-    }
+    },
+    autoSignIn ({commit}, payload) {
+      commit('setCurrentUser', payload);
+      commit('setIsAuthenticated', true);
+     }
   }
 })

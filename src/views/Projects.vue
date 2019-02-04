@@ -50,7 +50,7 @@ export default {
       }).then((result) => {
         if (result.value) {
           firebase.db.ref('users')
-          .child(this.$store.state.currentUser.user.uid + '/projects/' + projectId)
+          .child(this.$store.state.currentUser.uid + '/projects/' + projectId)
           .remove();
         }
       })
@@ -58,7 +58,7 @@ export default {
   },
   created() {
     firebase.db.ref('users')
-      .child(this.$store.state.currentUser.user.uid + '/projects/')
+      .child(this.$store.state.currentUser.uid + '/projects/')
       .on('value', snapshot => this.projects = snapshot.val());
   }
 }
