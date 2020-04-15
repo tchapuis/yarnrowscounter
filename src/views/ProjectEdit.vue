@@ -45,6 +45,19 @@
                     </b-row>
 
                     <b-row>
+                        <b-col cols="12" md="6">
+                            <b-form-group id="blockOrderFieldset" label="Ordre" label-for="blockOrder">
+                                <b-form-input id="blockOrder" type="number" v-model.number="block.order" required min="0"></b-form-input>
+                            </b-form-group>
+                        </b-col>
+                        <b-col cols="12" md="6">
+                            <b-form-group id="blockRepeatFieldset" label="Nombre de répétitions" label-for="blockRepeat">
+                                <b-form-input id="blockRepeat" type="number" v-model.number="block.repeat" required min="0"></b-form-input>
+                            </b-form-group>
+                        </b-col>
+                    </b-row>
+
+                    <b-row>
                         <b-col cols="12" md="12">
                             <b-form-group id="blockCommentFieldset" label="Commentaire" label-for="blockComment">
                                  <wysiwyg v-model="block.comment"/>
@@ -80,7 +93,7 @@ export default {
   },
   methods: {
       addBlock: function() {
-          this.blocks.push({name: '', rows: 0, maxRows: 1, stitchs: 0, maxStitchs: 1});
+          this.blocks.push({name: '', rows: 0, maxRows: 1, stitchs: 0, maxStitchs: 1, order: this.blocks.length + 1, repeat: 0});
           this.project.blocks = this.blocks;
           firebase.db.ref('/users/')
             .child(this.$store.state.currentUser.uid + '/projects/' + this.$route.params.projectId + '/blocks/')
@@ -134,9 +147,11 @@ export default {
         .child(this.$store.state.currentUser.uid + '/projects/' + this.$route.params.projectId)
         .on('value', snapshot => {
             this.project = snapshot.val();
-            this.blocks = this.project.blocks;
+            this.blocks = this.project.blocks.sort((a,b) => {
+                return a.order - b.order;
+            });
         });
-    
+
   }
 }
 </script>

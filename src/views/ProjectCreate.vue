@@ -41,6 +41,19 @@
                     </b-row>
 
                     <b-row>
+                        <b-col cols="12" md="6">
+                            <b-form-group id="blockOrderFieldset" label="Ordre" label-for="blockOrder">
+                                <b-form-input id="blockOrder" type="number" v-model.number="block.order" required min="0"></b-form-input>
+                            </b-form-group>
+                        </b-col>
+                        <b-col cols="12" md="6">
+                            <b-form-group id="blockRepeatFieldset" label="Nombre de répétitions" label-for="blockRepeat">
+                                <b-form-input id="blockRepeat" type="number" v-model.number="block.repeat" required min="0"></b-form-input>
+                            </b-form-group>
+                        </b-col>
+                    </b-row>
+
+                    <b-row>
                         <b-col cols="12" md="12">
                             <b-form-group id="blockCommentFieldset" label="Commentaire" label-for="blockComment">
                                     <wysiwyg v-model="block.comment"/>
@@ -53,7 +66,7 @@
                     </div>
                 </b-card>
             </div>
-            
+
             <div class="d-flex">
                 <b-button class="m-auto" variant="outline-primary" v-on:click="addBlock()"><i class="fas fa-plus mr-2"></i>Ajouter un block</b-button>
             </div>
@@ -78,7 +91,7 @@ export default {
   },
   methods: {
       addBlock: function() {
-          this.blocks.push({name: '', rows: 0, maxRows: 1, stitchs: 0, maxStitchs: 1});
+          this.blocks.push({name: '', rows: 0, maxRows: 1, stitchs: 0, maxStitchs: 1, order: this.blocks.length + 1, repeat: 0});
       },
       removeBlock: function(blockId) {
           this.blocks.splice(blockId, 1);

@@ -22,6 +22,7 @@
           <b-card class="mb-4">
             <h2 slot="header" class="mb-0">{{ block.name }}</h2>
             <div class="mb-3">
+              <p>Nombre de répétition : {{block.repeat}}</p>
               <p>Nombre de rangs</p>
               <b-progress :max="parseInt(block.maxRows)" class="mb-3">
                 <b-progress-bar v-if="parseInt(block.rows) < parseInt(block.maxRows)" :value="parseInt(block.rows)" variant="primary"></b-progress-bar>
@@ -153,6 +154,10 @@ export default {
       .once('value', snapshot => {
       this.project = snapshot.val();
       this.project.id = snapshot.key;
+      console.log(this.project);
+      this.project.blocks.sort((a,b) => {
+          return a.order - b.order;
+      });
     });
   }
 }
